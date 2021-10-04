@@ -22,6 +22,9 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('user.index')" :active="route().current('user.index')">
+                                    Portfolio
+                                </jet-nav-link>
                             </div>
                         </div>
 

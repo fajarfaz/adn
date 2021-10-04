@@ -6,6 +6,9 @@
             <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
                 Dashboard
             </Link>
+            <Link v-if="$page.props.user" :href="route('user.index')" class="text-sm text-gray-700 underline">
+                Portfolio
+            </Link>
 
             <template v-else>
                 <Link :href="route('login')" class="text-sm text-gray-700 underline">

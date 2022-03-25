@@ -77,7 +77,13 @@ class PortfolioController extends Controller
 
     public function delete(Request $request)
     {
-     
+        $portfolio = Portfolio::findOrFail($request->input('id'));
+        foreach ($portfolio->images as $image) {
+            if (file_exists('storage/'.$image->file_path)) {
+               unlink('storage/'.$image->file_path);
+               $image->delete();
+            }
+        }
         $request->has('id') ? 
                 Portfolio::find($request->input('id'))->delete() :
                 redirect()->back()->with('flash', [

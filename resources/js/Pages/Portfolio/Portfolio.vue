@@ -171,9 +171,9 @@
               this.form.title= data.title;
               this.form.description= data.description;
               data.images.forEach((value, index) => {
-                  this.form.loopImage.push(value);
+                  this.form.loopImage.push('../storage/'+value.file_path);
+                  console.log(value.file_path);
               });
-              console.log(this.form);
               this.editMode = true;
               this.openModal();
             },

@@ -1,199 +1,373 @@
 <template>
-    <Head title="Welcome" />
+<div id="loader" class="inset-0 m-auto"> 
+        <img src="/images/11.png" class="object-contain animate-pulse">
+    </div>
+    <div id="myDiv"  class="bg-[url('/images/bg.svg')] bg-cover overflow-x-hidden animate-bottom ">
 
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
-                Dashboard
-            </Link>
-            <Link v-if="$page.props.user" :href="route('user.index')" class="text-sm text-gray-700 underline">
-                Portfolio
-            </Link>
-
-            <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Log in
-                </Link>
-
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
-                    Register
-                </Link>
-            </template>
-        </div>
-
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                    <g clip-path="url(#clip0)" fill="#EF3B2D">
-                        <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                    </g>
-                </svg>
-            </div>
-
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                            </div>
-                        </div>
+        <nav class="bg-[#232222] text-white border-gray-200 px-4 md:px-20 lg:px-40 xl:px-52 py-4 rounded fixed z-40 w-full" data-aos="zoom-in-top" data-aos-duration="800"  x-data="{open: false , isOpen : false}" >
+            <div class="container flex flex-wrap justify-between items-center mx-auto">
+                <a href="/" class="flex space-x-4 items-center opacity-75 hover:opacity-100 duration-300">
+                    <img src="/images/11.png" class="w-12 h-12 object-contain">
+                    <div class="flex flex-col leading-4 justify-start md:hidden lg:inline-flex">
+                        <span class=" text-base font-semibold whitespace-nowrap dark:text-white">ADN </span>
+                        <span class="tracking-wider">Developer</span>
                     </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                            </div>
-                        </div>
-                    </div>
+                </a>
+                <div class="flex md:order-2">
+                    <button type="button" class="hidden md:inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
+                    <button data-collapse-toggle="mobile-menu-4" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-4" aria-expanded="false" @click="isOpen = !isOpen">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!isOpen" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                        <svg x-show="isOpen" class=" w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
                 </div>
-            </div>
-
-            <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-
-                        <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                            Shop
-                        </a>
-
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-
-                        <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                            Sponsor
-                        </a>
-                    </div>
+                <div class="md:hidden justify-between items-center w-full flex md:w-auto md:order-1 " x-show="isOpen" x-transition>
+                    <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-base tracking-wide md:font-medium w-full text-center space-y-4">
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-4 md:pl-2 text-white bg-blue-700 bg-blue-400/30" aria-current="page">Home</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Work</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</a>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+                <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-base tracking-wide md:font-medium">
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-4 md:pl-2 text-white bg-blue-700  md:bg-transparent border-l-2  border-red-600 md:p-0 dark:text-white" aria-current="page">Home</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Work</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container bg-[url('bg-top.jpg')] bg-contain mx-auto shadow-xl mt-20 rounded-b-[54px]" data-aos="fade-down">
+            <div class=" h-full backdrop-blur-lg text-white rounded-none md:rounded-b-[50px] md:px-10 lg:px-24 xl:px-36 py-10 lg:py-16 xl:py-20 relative" style="background: linear-gradient(112.51deg, rgba(40, 33, 38, 0.8) 27.75%, rgba(109, 10, 207, 0) 122.45%);">
+                <div class="flex md:flex-row flex-col ">
+                    <h1 class="text-3xl md:text-4xl xl:text-6xl lg:text-5xl font-bold md:leading-snug lg:leading-snug xl:leading-snug z-10 w-100 md:w-8/12 md:px-0 px-8 md:pb-0 pb-8  text-center md:text-left"  data-aos="zoom-in-right" data-aos-duration="500">
+                        We help you 
+                        <span class="relative inline-flex px-4 -ml-4"> 
+
+                            <span class="z-10"> build </span> 
+                            <img src="/images/build-back.svg" class="absolute inset-x-0 bottom-3 z-0 w-full">
+                            <img src="/images/build-front.svg" class="absolute bottom-3 inset-x-0 z-20 w-10/12 mx-auto">
+                        </span>
+                        <span class="text-[#FF502F]">digital products </span>for your 
+                        <span class="text-[#FF502F]">glorious cause</span>
+                    </h1>
+                    <div class="relative md:w-4/12 w-full px-4 flex items-center z-10"  >
+                        <img src="/images/rss.png" class="md:absolute relative object-contain md:py-0 py-4 w-32 md:w-40 xl:w-72 lg:w-52 md:-right-8 lg:-right-16 xl:right-5 lg:top-0 xl:-top-10 mx-auto" data-aos="zoom-in-left" data-aos-duration="800">
+                    </div>
+                </div>
+                
+                <div class="text-sm xl:text-xl lg:text-lg font-semibold md:mt-16 lg:mt-24 leading-relaxed md:leading-loose text-gray-50 css-typing text-center tracking-wider md:px-0 px-8 md:mt-0 mt-6" id="labelOne">
+
+                </div>
+
+                <div class="mx-auto flex flex-row items-center space-x-6 md:space-x-10 px-8 md:px-10 lg:px-16 xl:px-32 mt-10 text-xs md:text-base lg:text-lg justify-between w-max">
+                    <button class="rounded-full bg-gradient-to-bl from-orange-500 to-orange-600 text-white font-semibold  py-5 md:px-8 lg:px-12 tracking-wider w-72 shadow-lg duration-500 hover:shadow-orange-500/50"><span class="hidden md:inline-block"> Start Now</span> <span class="md:hidden inline-block"> Start now</span></button>
+                    <button class="rounded-full border border-white text-white font-semibold  py-5 md:px-8 lg:px-12 tracking-wider w-72 duration-300 hover:bg-white hover:text-gray-700">See our work</button>
+
+                </div>
+                <img src="/images/bubble-1.png" class="absolute top-3 md:top-0 lg:top-2 w-10/12 md:w-11/12 lg:w-10/12 inset-x-0 mx-auto">
+                <div class="flex flex-row rotate-90 absolute -left-20 md:-left-16 lg:-left-10 bottom-72 md:bottom-4 items-center space-x-2 text-white z-10 md:text-base text-xs">
+                    <label class="tracking-widest" data-aos="fade-right">Est. 2019</label>
+                    <span class="bg-gradient-to-r from-white w-32 h-0.5" data-aos="fade-right" data-aos-duration="300"> </span>
                 </div>
             </div>
         </div>
+
+        <section class="container mx-auto flex flex-col space-y-10 px-8 md:px-10 lg:px-36 my-24 text-center">
+            <label class="font-semibold md:text-xl lg:text-2xl  text-white tracking-wider" data-aos="zoom-in">
+                Developing ideas from our cool clients to create a digital product
+            </label>
+            <div class="flex snap-x overflow-x-auto flex-row space-x-8 md:space-x-4 md:space-x-10 justify-between md:w-10/12 mx-auto md:pt-10 pb-5" id="clientScroll">
+
+                <img src="/images/11.png" class="snap-center shrink-0 w-12 md:w-20 lg:w-24 object-contain grayscale hover:grayscale-0 duration-300 cursor-pointer" data-aos="zoom-in" data-aos-duration="500">
+                <img src="/images/logo.png" class="snap-center shrink-0 w-12 md:w-20 lg:w-24 object-contain grayscale hover:grayscale-0 duration-300 cursor-pointer" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="/images/logo.png" class="snap-center shrink-0 w-12 md:w-20 lg:w-24 object-contain grayscale hover:grayscale-0 duration-300 cursor-pointer" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="/images/logo.png" class="snap-center shrink-0 w-12 md:w-20 lg:w-24 object-contain grayscale hover:grayscale-0 duration-300 cursor-pointer" data-aos="zoom-in" data-aos-duration="2000">
+                <img src="/images/logo.png" class="snap-center shrink-0 w-12 md:w-20 lg:w-24 object-contain grayscale hover:grayscale-0 duration-300 cursor-pointer" data-aos="zoom-in" data-aos-duration="2500">
+
+            </div>
+            <div class="flex flex-row space-x-4 md:space-x-10 mx-auto pt-0 md:pt-8" data-aos="zoom-out">
+                <button class="h-3 md:h-6 w-3 md:w-6 bg-gradient-to-br from-gray-300 to-gray-600 rounded-full hover:bg-white duration-300 focus:ring ring-white/50 focus:bg-gray-700" id="leftScroll"></button>
+                <button class="h-3 md:h-6 w-3 md:w-6 bg-gradient-to-br from-gray-300 to-gray-600 rounded-full hover:bg-white duration-300 focus:ring ring-white/50 focus:bg-gray-700" id="midScroll"></button>
+                <button class="h-3 md:h-6 w-3 md:w-6 bg-gradient-to-br from-gray-300 to-gray-600 rounded-full hover:bg-white duration-300 focus:ring ring-white/50 focus:bg-gray-700" id="righttScroll"></button>
+
+            </div>          
+        </section>
+
+        <section class="container mx-auto flex flex-col space-y-10 px-8  md:px-10 lg:px-36 my-24 text-white">
+            <label class="font-semibold xl:text-5xl text-4xl tracking-wider" data-aos="fade-right">Services </label>
+
+            <div class="relative flex snap-x md:grid grid-cols-3 gap-8 xl:gap-12 overflow-x-auto">
+                
+                <div data-aos="fade-right" class="snap-center shrink-0 md:w-auto w-52">
+                    <div class="flex flex-col space-y-4 transition-all  bg-size-200 bg-pos-0 hover:bg-pos-100 duration-1000 bg-gradient-to-b to-purple-700 via-orange-400 from-gray-300/30 py-5 lg:py-7 px-6 lg:px-8 rounded-lg h-full"  >
+                        <div class="flex flex-row space-x-2 xl:space-x-4 items-center ">
+                            <div class="shrink-0 flex items-center flex-row bg-gray-900/50 rounded-full xl:w-20 w-12 lg:w-16 xl:h-20 h-12 lg:h-16 justify-center my-auto">
+                                <img src="/images/ui.svg" class="w-8 lg:w-10 xl:w-12">
+
+                            </div>
+                            <label class="font-semibold lg:text-xl xl:text-2xl tracking-wider">UI/UX Design</label>                     
+                        </div>
+                        <p class="tracking-widest leading-relaxed xl:text-xl lg:text-lg text-base">Developing ideas from our cool clients to create a digital product</p>
+                    </div>
+                </div>
+                <div data-aos="fade-right" class="snap-center shrink-0 md:w-auto w-52" data-aos-duration="500">
+                    <div class="flex flex-col space-y-4 transition-all bg-size-200 bg-pos-0 hover:bg-pos-100 duration-1000 bg-gradient-to-b to-purple-700 via-orange-400 from-indigo-300/30 py-5 lg:py-7 px-6 lg:px-8 rounded-lg h-full" >
+                        <div class="flex flex-row space-x-2 xl:space-x-4 items-center ">
+                            <div class="shrink-0 flex items-center flex-row bg-gray-900/50 rounded-full xl:w-20 w-12 lg:w-16 xl:h-20 h-12 lg:h-16 justify-center my-auto">
+                                <img src="/images/front.svg" class="w-6 lg:w-7 xl:w-9">
+                            </div>
+                            <label class="font-semibold lg:text-xl xl:text-2xl tracking-wider">Front End Developer</label>                      
+                        </div>
+                        <p class="tracking-widest leading-relaxed xl:text-xl lg:text-lg text-base">Developing ideas from our cool clients to create a digital product</p>
+                    </div>
+                </div>
+                <div data-aos="fade-right" class="snap-center shrink-0 md:w-auto w-52" data-aos-duration="1000">
+                    <div class="flex flex-col space-y-4 transition-all  bg-size-200 bg-pos-0 hover:bg-pos-100 duration-1000 bg-gradient-to-b to-purple-700 via-orange-400 from-gray-300/30 py-5 lg:py-7 px-6 lg:px-8 rounded-lg h-full" >
+                        <div class="flex flex-row space-x-2 xl:space-x-4 items-center ">
+                            <div class="shrink-0 flex items-center flex-row bg-gray-900/50 rounded-full xl:w-20 w-12 lg:w-16 xl:h-20 h-12 lg:h-16 justify-center my-auto">
+                                <img src="/images/back.svg" class="w-5 lg:w-6 xl:w-8">
+                            </div>
+                            <label class="font-semibold lg:text-xl xl:text-2xl tracking-wider">Back End Developer</label>                       
+                        </div>
+                        <p class="tracking-widest leading-relaxed xl:text-xl lg:text-lg text-base">Developing ideas from our cool clients to create a digital product</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto flex flex-col space-y-10 px-8 md:px-10 lg:px-36 my-24 text-white pb-16">
+            <div class="flex flex-row justify-between items-end">
+                <label class="font-semibold xl:text-5xl text-4xl tracking-wider"  data-aos="fade-right">Portfolio </label>
+                <a href="#" class="group hover:text-gray-400 duration-300 flex flex-row space-x-2 md:space-x-4 items-center text-gray-50 cursor-pointer" >
+                    <label class="font-semibold xl:text-xl lg:text-lg tracking-wider cursor-pointer" data-aos="fade-left"> <span class="md:inline hidden">Watch more</span> </label>
+                    <svg class="fill-gray-50 group-hover:fill-gray-400 duration-300 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z"/></svg>
+                </a>
+            </div>
+
+            <div class="flex snap-x overflow-x-auto md:overflow-visible overflow-y-hidden md:grid grid-cols-2 gap-10 lg:gap-20">        
+                <div class="flex flex-col space-y-4 shrink-0 snap-center md:w-auto w-full">
+                    <label class="font-semibold text-2xl xl:text-3xl text-2xl tracking-wider"  data-aos="fade-right">Catering App</label>
+                    <div class="h-max lg:h-full flex flex-col bg-gray-400/30 py-7 md:px-10 px-6 rounded-2xl text-lg relative" data-aos="fade-down">
+                        <div class="w-full flex flex-col space-y-6">
+                            <label class="xl:text-2xl lg:text-xl font-semibold tracking-wider" data-aos="fade-down">Web app with Responsive display</label>                     
+                            <a href="#" class="text-white bg-orange-600 hover:bg-purple-500 duration-300 xl:text-base text-sm tracking-wider py-2.5 px-8 rounded-lg w-max font-semibold shadow-sm"> View detail</a>
+                        </div>
+                        <div class="relative h-[200px] lg:h-full">                          
+                        </div>
+                        <img src="/images/catering.png" class="absolute object-contain w-68 xl:w-96 lg:w-80 inset-x-0 -bottom-10 lg:-bottom-20 mx-auto " data-aos="fade-down" data-aos-duration="500">
+                    </div>              
+                </div>
+
+                <div class="flex flex-col space-y-4 shrink-0 snap-center md:w-auto w-full">
+                    <label class="font-semibold text-2xl xl:text-3xl text-2xl tracking-wider"  data-aos="fade-left">Attendance App</label>
+                    <div class="flex flex-row bg-gray-400/30 py-7 md:px-10 px-6 rounded-2xl text-lg relative" data-aos="fade-down">
+                        <div class="w-7/12 flex flex-col space-y-8">
+                            <label class="xl:text-2xl lg:text-xl font-semibold tracking-wider" data-aos="fade-down">Web app with Responsive display</label>
+                            <p class="leading-relaxed text-sm xl:text-lg lg:text-sm">Developing ideas from our cool clients to create a digital product
+                            Developing ideas from our cool clients to create a digital product</p>
+                            <a href="#" class="text-white bg-orange-600 hover:bg-purple-600 duration-300 xl:text-base text-sm tracking-wider py-2.5 px-8 rounded-lg w-max font-semibold shadow-sm"> View detail</a>
+                        </div>
+                        <div class="relative w-4/12">                           
+                        </div>
+                        <img src="/images/attendance.png" class="absolute object-contain w-40 md:w-52 xl:w-64 lg:w-52 -right-2 md:-right-16 lg:top-0 xl:-top-20 aos-init aos-animate z-20 overflow-visible" data-aos="fade-right" data-aos-duration="1500">
+                    </div>              
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gradient-to-bl from-gray-100/50 to-black/30 p-1 pl-0 text-white text-lg md:w-11/12 lg:w-max md:rounded-r-3xl rounded-none rounded-l-none mt-24 md:mr-0 -mr-1" data-aos="fade-right">
+            <div class="flex flex-col space-y-10 bg-black/30 backdrop-blur-md md:rounded-r-3xl rounded-none py-10 pl-10 xl:pl-36 lg:pl-28 rounded-l-none xl:pr-40 lg:pr-10">
+                <div class="flex flex-row space-x-4 items-center" data-aos="fade-top" data-aos-duration="500">
+                    <img src="/images/contact.svg" class="w-14 md:w-20 object-contain">
+                    <label class="font-semibold text-2xl xl:text-5xl text-4xl tracking-wider">Talk about your idea ?</label>
+                </div>
+                <div class=" md:ml-16 lg:ml-24 justify-center flex flex-col space-y-10" data-aos="flip-up" data-aos-duration="1200">
+                    <label class="text-sm md:text-base text-center px-8 tracking-wider">Developing ideas from our cool clients to create a digital product</label>
+                    <div class="border-2 border-white/30 p-1 xl:p-2 rounded-xl md:w-max w-8/12 mx-auto flex flex-col md:flex-row space-y-2 md:space-y-0">
+                        <input type="text" name="" placeholder="hello@adn-dev.com" class="focus:outline-none focus:bg-black/50 bg-transparent rounded-l-xl py-2 pl-4 pr-0 md:pr-20 duration-300 xl:text-base text-sm">
+                        <button class="xl:px-8 px-6 xl:py-2 py-2 bg-gradient-to-bl from-orange-500 to-purple-600 text-white font-semibold xl:text-lg text-sm rounded-lg tracking-widest opacity-75 hover:opacity-100 duration-300">Send</button>
+                    </div>
+                </div>
+                <div class="text-xs md:text-base flex flex-col text-gray-300 xl:text-base lg:text-sm leading-relaxed" data-aos="fade-up" data-aos-duration="500">
+                    <label class="text-white pb-2 tracking-widest">Active Hours: </label>
+                    <label class="tracking-wider">International : 00.00 UTC - 17.00 UTC</label>
+                    <label class="tracking-wider">Indonesia : 07.00 WIB - 22.00 WIB</label>
+                </div>
+            </div>
+        </section>
+
+        <footer class=" border-t-2 border-white/30 bottom-0 bg-black/30 grid grid-cols-1 md:grid-cols-3 gap-10 md:justify-items-center justify-items-start py-12 mt-20 text-white lg:px-36 px-10">
+            <div class="flex flex-row space-x-4 items-center opacity-75 hover:opacity-100 duration-300">
+                <img src="/images/logo.png" class="object-contain md:w-16 w-10">
+                <div class="flex flex-col">
+                    <label class="font-semibold tracking-wider text-base xl:text-xl lg:text-lg leading-5">ADN dev</label>
+                    <label class="font-semibold tracking-wider text-sm md:text-base text-gray-400">Malang, Indonesia</label>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <label class="tracking-wider font-semibold pb-3">Our Media</label>
+                <div class="flex flex-row space-x-4">
+                    <a href="">
+                        <img src="/images/ig.svg" class="w-8 object-contain opacity-75 duration-300 hover:opacity-100">
+                    </a>
+                    <a href="">
+                        <img src="/images/fb.svg" class="w-8 object-contain opacity-75 duration-300 hover:opacity-100">
+                    </a>
+                    <a href="">
+                        <img src="/images/dribbble.svg" class="w-8 object-contain opacity-75 duration-300 hover:opacity-100">
+                    </a>
+                    <a href="">
+                        <img src="/images/bihance.svg" class="w-8 object-contain opacity-75 duration-300 hover:opacity-100">
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <label class="tracking-wider font-semibold pb-2">Contact us</label>
+
+                <label class="tracking-wider text-gray-300 text-sm md:text-base">hello@adn-dev.com</label>
+                <label class="tracking-wider text-gray-300 text-sm md:text-base">088890308781</label>
+
+            </div>
+
+        </footer>
+
+
     </div>
 </template>
-
-<style scoped>
-    .bg-gray-100 {
-        background-color: #f7fafc;
-        background-color: rgba(247, 250, 252, var(--tw-bg-opacity));
+<style type="text/css">
+    body{
+        font-family: 'Poppins', sans-serif;
     }
 
-    .border-gray-200 {
-        border-color: #edf2f7;
-        border-color: rgba(237, 242, 247, var(--tw-border-opacity));
+    #loader {
+        position: absolute;
+        z-index: 1;
+        width: 120px;
+        height: 120px;
     }
 
-    .text-gray-400 {
-        color: #cbd5e0;
-        color: rgba(203, 213, 224, var(--tw-text-opacity));
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
     }
 
-    .text-gray-500 {
-        color: #a0aec0;
-        color: rgba(160, 174, 192, var(--tw-text-opacity));
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
-    .text-gray-600 {
-        color: #718096;
-        color: rgba(113, 128, 150, var(--tw-text-opacity));
+    /* Add animation to "page content" */
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
     }
 
-    .text-gray-700 {
-        color: #4a5568;
-        color: rgba(74, 85, 104, var(--tw-text-opacity));
+    @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
     }
 
-    .text-gray-900 {
-        color: #1a202c;
-        color: rgba(26, 32, 44, var(--tw-text-opacity));
+    @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
     }
 
-    @media (prefers-color-scheme: dark) {
-        .dark\:bg-gray-800 {
-            background-color: #2d3748;
-            background-color: rgba(45, 55, 72, var(--tw-bg-opacity));
-        }
-
-        .dark\:bg-gray-900 {
-            background-color: #1a202c;
-            background-color: rgba(26, 32, 44, var(--tw-bg-opacity));
-        }
-
-        .dark\:border-gray-700 {
-            border-color: #4a5568;
-            border-color: rgba(74, 85, 104, var(--tw-border-opacity));
-        }
-
-        .dark\:text-white {
-            color: #fff;
-            color: rgba(255, 255, 255, var(--tw-text-opacity));
-        }
-
-        .dark\:text-gray-400 {
-            color: #cbd5e0;
-            color: rgba(203, 213, 224, var(--tw-text-opacity));
-        }
+    #myDiv {
+        display: none;
     }
+
 </style>
 
 <script>
     import { defineComponent } from 'vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
-        components: {
-            Head,
-            Link,
-        },
-
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
             laravelVersion: String,
             phpVersion: String,
+        },
+        mounted(){
+            var typewriter = new Typewriter(app, {
+                loop: false,
+                delay: 40,
+            });
+
+            typewriter  
+            .typeString('I have ideas but confusion to realizing it.')  
+            .pauseFor(500)  
+            .deleteChars(31)
+            .typeString(', Let us realizing your digital product idea to life, from beginning to ready for use, let`s continue talk about it !')
+            .pauseFor(4000)
+            .start();
+
+
+
+
+            $(function() { 
+                $(window).on('scroll',function() 
+                { 
+                    AOS.init();                     
+                }
+                ); 
+                
+            });
+
+            var myVar;
+            function preloader() {
+                myVar = setTimeout(showPage, 500);
+            }
+
+            function showPage() {
+
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+
+            $("#leftScroll").click(function () { 
+                var leftPos = $('#clientScroll').scrollLeft();
+                $("#clientScroll").animate({scrollLeft: leftPos - 400}, 0);
+                console.log('regist');
+            });
+
+            $("#midScroll").click(function () { 
+                var leftPos = $('#clientScroll').scrollLeft();
+                $("#clientScroll").animate({scrollLeft: leftPos + 200}, 0);
+            });
+
+            $("#rightScroll").click(function () { 
+                var leftPos = $('#clientScroll').scrollLeft();
+                $("#clientScroll").animate({scrollLeft: leftPos + 400}, 0);
+            });
         }
     })
 </script>

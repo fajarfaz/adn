@@ -58,7 +58,7 @@
                                             <form method="POST" action="{{route('tags.destroy', [$tag->id])}}" class="d-inline" onsubmit="return confirm('Delete this Tag permanently?')">
                                             @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <input type="submit" value="Delete" class="bg-red-500 hover:bg-red-400 text-slate-900 font-bold py-2 px-4 rounded-r cursor-pointer">
+                                                <input type="submit" value="Delete" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-r cursor-pointer">
                                             </form>
                                         </div>
                                     </td>

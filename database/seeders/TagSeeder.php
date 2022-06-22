@@ -21,7 +21,7 @@ class TagSeeder extends Seeder
         $faker = Faker::create('id_ID');
 
     	for ($i=0; $i < 10; $i++) { 
-    		$name = $faker->sentence;
+    		$name = $faker->name;
     		DB::table('tags')->insert([
 	            'name' => $name,
 	            'slug' => Str::slug($name),

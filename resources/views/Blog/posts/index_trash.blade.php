@@ -9,8 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <a href="{{route('posts.create')}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Add Post</a>
-                    <a href="{{route('posts.trash')}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Trash</a>
+                    <a href="{{route('posts.index')}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Index</a>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -49,8 +48,11 @@
                                     </th>
                                     <td class="px-6 py-4 text-right">
                                         <div class="inline-flex">
-                                            <a href="{{route('posts.edit',$post->slug)}}" class="bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-bold py-2 px-4 rounded-l">Edit</a>
-                                            <form method="POST" action="{{route('posts.destroy', [$post->slug])}}" class="d-inline" onsubmit="return confirm('Move post to trash?')">
+                                            <form method="POST" action="{{route('posts.restore', $post->slug)}}" class="d-inline">
+                                            @csrf
+                                                <input type="submit" value="Restore" class="bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-bold py-2 px-4 rounded-l cursor-pointer"/>
+                                            </form>
+                                            <form method="POST" action="{{route('posts.deletePermanent', $post->id)}}" class="d-inline" onsubmit="return confirm('Delete this data permanently?')">
                                             @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="submit" value="Delete" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-r cursor-pointer">

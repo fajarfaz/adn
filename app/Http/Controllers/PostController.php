@@ -170,11 +170,11 @@ class PostController extends Controller
     public function trash(){
         $posts = Post::onlyTrashed()->get();
 
-        return view('posts.trash', compact('posts'));
+        return view('Blog.posts.index_trash', compact('posts'));
     }
 
-    public function restore($id) {
-        $post = Post::withTrashed()->findOrFail($id);
+    public function restore($slug) {
+        $post = Post::withTrashed()->where('slug',$slug)->first();
 
         if ($post->trashed()) {
             $post->restore();
